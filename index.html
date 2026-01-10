@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>unisat.ai</title>
+    <meta name="description" content="unisat.ai — Reserved domain. For strategic inquiries only.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            line-height: 1.6; 
+            color: #ffffff; 
+            background: linear-gradient(135deg, #050508 0%, #0a0a12 100%); /* 深空黑渐变 */
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            padding: 20px; 
+            text-align: center; 
+            position: relative; 
+            overflow-x: hidden; 
+        }
+        .light-effect { 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            width: min(120vw, 1000px); 
+            height: min(120vh, 1000px); 
+            background: radial-gradient(circle at center, rgba(120, 130, 150, 0.06) 0%, transparent 65%); /* 微光灰，无彩色 */
+            transform: translate(-50%, -50%); 
+            pointer-events: none; 
+            z-index: -1; 
+        }
+        .container { 
+            max-width: 760px; 
+            width: 100%; 
+            padding: 70px 40px; 
+            background: rgba(10, 12, 20, 0.8); /* 深灰蓝 */
+            backdrop-filter: blur(16px); 
+            border-radius: 28px; 
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(100, 110, 130, 0.2); 
+            border: 1px solid rgba(100, 110, 130, 0.15); 
+            z-index: 1; 
+        }
+        h1 { 
+            font-size: clamp(3rem, 9vw, 5.5rem); 
+            font-weight: 200; 
+            letter-spacing: 0.25em; 
+            margin-bottom: 35px; 
+            opacity: 0.95; 
+            text-transform: lowercase; 
+            color: #e0e0ff; /* 银白，非亮白 */
+        }
+        .domain { display: inline-block; transition: opacity 0.3s ease; }
+        .domain:hover { opacity: 0.8; }
+        p { 
+            font-size: clamp(1.2rem, 4.5vw, 1.6rem); 
+            opacity: 0.85; 
+            max-width: 640px; 
+            margin: 0 auto 45px; 
+            line-height: 1.8; 
+            color: #d0d0e0;
+        }
+        .note-section { 
+            background: rgba(20, 25, 40, 0.3); 
+            border-radius: 18px; 
+            padding: 28px; 
+            margin: 45px 0; 
+            border: 1px solid rgba(100, 110, 130, 0.2); 
+        }
+        .note-text { 
+            font-size: 0.98rem; 
+            opacity: 0.75; 
+            line-height: 1.8; 
+            color: #b0b8d0;
+        }
+        .contact-section { margin-top: 45px; }
+        .email-link { 
+            font-size: 1.5rem; 
+            color: #c0c8e0; /* 冷灰蓝 */
+            text-decoration: none; 
+            font-family: 'Courier New', monospace; 
+            padding: 12px 26px; 
+            background: rgba(80, 90, 110, 0.15); 
+            border-radius: 12px; 
+            display: inline-block; 
+            border: 1px solid rgba(80, 90, 110, 0.4); 
+            transition: all 0.3s ease; 
+        }
+        .email-link:hover { 
+            background: rgba(80, 90, 110, 0.25); 
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 20px rgba(80, 90, 110, 0.15); 
+        }
+        .contact-note { 
+            font-size: 0.95rem; 
+            opacity: 0.65; 
+            margin-top: 18px; 
+            font-style: italic; 
+            color: #a0a8c0;
+        }
+        .footer { 
+            position: absolute; 
+            bottom: 30px; 
+            font-size: 0.85rem; 
+            opacity: 0.4; 
+            width: 100%; 
+            text-align: center; 
+            color: #8088a0;
+        }
+        @media (max-width: 768px) { 
+            .container { padding: 50px 30px; margin: 20px; } 
+            .email-link { font-size: 1.3rem; } 
+        }
+    </style>
+</head>
+<body>
+    <div class="light-effect"></div>
+    <div class="container">
+        <h1><span class="domain">unisat.ai</span></h1>
+        <p>This domain is reserved.<br>Future project consideration.</p>
+        
+        <!-- 法律免责（关键） -->
+        <div class="note-section">
+            <div class="note-text">
+                This domain is not associated with any existing entities, products, or services bearing similar names, 
+                including but not limited to blockchain wallets, satellite systems, or energy management platforms. 
+                Its use is for future technology initiatives only.
+            </div>
+        </div>
+        
+        <!-- 联系方式 -->
+        <div class="contact-section">
+            <a href="#" class="email-link" aria-label="Send email">
+                <span id="email-display">joshua369x@gmail.com</span>
+            </a>
+            <div class="contact-note">
+                For strategic inquiries only.
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        © <span id="currentYear"></span> unisat.ai — All rights reserved.
+    </div>
+
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        const email = 'joshua369x' + '@' + 'gmail.com';
+        const subject = '?subject=Inquiry: unisat.ai';
+        const mailto = 'mailto:' + email + subject;
+        document.querySelector('.email-link').href = mailto;
+        document.getElementById('email-display').textContent = email;
+    </script>
+</body>
+</html>
