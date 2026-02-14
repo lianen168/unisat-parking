@@ -18,7 +18,7 @@
         :root {
             --neon-blue: #00f3ff;
             --neon-purple: #bc13fe;
-            --deep-space: #020208; /* Slightly darker for contrast */
+            --deep-space: #020208;
             --star-white: #e0e0ff;
             --glass-bg: rgba(5, 5, 12, 0.75);
             --glass-border: rgba(0, 243, 255, 0.3);
@@ -28,7 +28,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* Revert cursor:none on global, handle via specific class for desktop only */
         }
 
         body {
@@ -57,7 +56,7 @@
             }
         }
 
-        /* --- MOBILE OPTIMIZATION: Hide Custom Cursor --- */
+        /* --- MOBILE OPTIMIZATION --- */
         @media (pointer: coarse) {
             #cursor { display: none !important; }
             * { cursor: auto; }
@@ -71,7 +70,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 1; /* Increased opacity for visibility */
+            opacity: 1;
         }
 
         .container {
@@ -84,8 +83,7 @@
 
         /* Header */
         header {
-            min-height: 100vh; /* Fallback */
-            min-height: 100dvh; /* Mobile optimized */
+            min-height: 100dvh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -109,6 +107,18 @@
             border-left: 3px solid var(--neon-blue);
             max-width: 800px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* New Author Style */
+        .quote-author {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #fff;
+            text-align: right;
+            font-weight: bold;
+            opacity: 0.8;
+            letter-spacing: 1px;
         }
 
         .main-title {
@@ -162,6 +172,17 @@
             margin: 0 auto;
         }
 
+        .vision-author {
+            display: block;
+            margin-top: 15px;
+            font-size: 1.2rem;
+            color: var(--neon-blue);
+            font-family: 'Share Tech Mono', monospace;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-style: normal;
+        }
+
         .highlight { color: var(--neon-purple); font-weight: 700; }
 
         /* Grid */
@@ -173,7 +194,7 @@
         }
 
         .grid-item {
-            background: rgba(6, 6, 14, 0.85); /* Darker background for readability */
+            background: rgba(6, 6, 14, 0.85);
             border: 1px solid rgba(0, 243, 255, 0.15);
             padding: 30px 20px;
             border-radius: 12px;
@@ -182,7 +203,6 @@
             backdrop-filter: blur(10px);
         }
 
-        /* Hover only on Desktop to prevent sticky hover states on mobile */
         @media (hover: hover) {
             .grid-item:hover {
                 transform: translateY(-10px);
@@ -297,10 +317,7 @@
 </head>
 <body>
 
-    <!-- Cursor (Desktop Only) -->
     <div id="cursor"></div>
-    
-    <!-- 3D Background -->
     <div id="canvas-container"></div>
 
     <div class="container">
@@ -308,6 +325,7 @@
             <div class="quote-container">
                 <div class="musk-quote">
                     "In the long term, space-based AI is obviously the only way to scale."
+                    <span class="quote-author">- Elon Musk</span>
                 </div>
             </div>
 
@@ -324,6 +342,7 @@
         <section class="vision-section">
             <p class="vision-quote">
                 "Space-based industries will <span class="highlight">vastly exceed the value of all of Earth</span>, given that you could harness roughly 100,000 times more energy than Earth..."
+                <span class="vision-author">- Elon Musk</span>
             </p>
         </section>
 
@@ -498,7 +517,7 @@
     <script>
         // Copy Email Logic
         function copyEmail() {
-            const email = "ltzwin2021@gmail.com";
+            const email = "joshua369x@gmail.com";
             navigator.clipboard.writeText(email).then(() => {
                 const btn = document.getElementById('contactBtn');
                 const originalText = btn.innerText;
@@ -516,15 +535,12 @@
             });
         }
 
-        // Custom Cursor Logic (Only active on desktop via CSS, but JS needs to track mouse)
+        // Custom Cursor Logic
         const cursor = document.getElementById('cursor');
-        // Only add listener if device has mouse interaction to save mobile resources
         if (window.matchMedia("(pointer: fine)").matches) {
             document.addEventListener('mousemove', (e) => {
-                // Use transform instead of left/top for better performance
                 cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
             });
-            // Initial positioning helper
             cursor.style.left = '0px'; 
             cursor.style.top = '0px';
         }
@@ -537,32 +553,31 @@
             camera.position.z = 16;
             camera.position.y = 2;
 
-            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true }); // Keep antialias for smooth lines
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
-            // Limit pixel ratio for mobile performance (battery & heat)
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
             container.appendChild(renderer.domElement);
 
-            // 1. Earth Wireframe - VISIBILITY FIX: Brighter Color, Higher Opacity
-            const geometry = new THREE.IcosahedronGeometry(7, 2);
+            // 1. Earth Wireframe - Size reduced to match QuarkWatt (7 -> 6)
+            const geometry = new THREE.IcosahedronGeometry(6, 2);
             const material = new THREE.MeshBasicMaterial({ 
-                color: 0x00aaff, /* Bright Blue */
+                color: 0x00aaff,
                 wireframe: true,
                 transparent: true,
-                opacity: 0.4 /* Increased from 0.15 */
+                opacity: 0.4
             });
             const earth = new THREE.Mesh(geometry, material);
             scene.add(earth);
 
-            // 2. Inner Core - VISIBILITY FIX: Solid sphere to block transparency and create depth
-            const coreGeo = new THREE.IcosahedronGeometry(6.9, 2);
+            // 2. Inner Core - Size reduced (6.9 -> 5.9)
+            const coreGeo = new THREE.IcosahedronGeometry(5.9, 2);
             const coreMat = new THREE.MeshBasicMaterial({ 
-                color: 0x020205, /* Match background to hide back lines */
+                color: 0x020205,
             });
             const core = new THREE.Mesh(coreGeo, coreMat);
             scene.add(core);
 
-            // 3. Particles - PERFORMANCE FIX: Reduced count from 800 to 400
+            // 3. Particles
             const particlesGeometry = new THREE.BufferGeometry();
             const particlesCount = 400; 
             const posArray = new Float32Array(particlesCount * 3);
@@ -573,7 +588,7 @@
 
             particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
             const particlesMaterial = new THREE.PointsMaterial({
-                size: 0.08, /* Slightly larger */
+                size: 0.08,
                 color: 0x00f3ff,
                 transparent: true,
                 opacity: 0.7
@@ -589,14 +604,14 @@
             for (let i = 0; i < 12; i++) {
                 const sat = new THREE.Mesh(satGeo, satMat);
                 const angle = (i / 12) * Math.PI * 2;
-                const radius = 9.5; /* Slightly wider orbit */
+                const radius = 9.5;
                 sat.position.x = Math.cos(angle) * radius;
                 sat.position.z = Math.sin(angle) * radius;
                 sat.rotation.y = -angle;
                 satelliteGroup.add(sat);
             }
             
-            const pathGeo = new THREE.TorusGeometry(9.5, 0.02, 16, 64); /* Lower segments for perf */
+            const pathGeo = new THREE.TorusGeometry(9.5, 0.02, 16, 64);
             const pathMat = new THREE.MeshBasicMaterial({ color: 0x00f3ff, transparent: true, opacity: 0.3 });
             const path = new THREE.Mesh(pathGeo, pathMat);
             path.rotation.x = Math.PI / 2;
